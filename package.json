@@ -1,0 +1,27 @@
+{
+  "name": "gettingtoknow-graphql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node_modules/.bin/nodemon index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrGuiMan/gettingtoknow-graphql.git"
+  },
+  "author": "Guillaume Mantopoulos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MrGuiMan/gettingtoknow-graphql/issues"
+  },
+  "homepage": "https://github.com/MrGuiMan/gettingtoknow-graphql#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "mongodb": "^2.2.30"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}

@@ -1,0 +1,16 @@
+version: "3"
+services:
+    web:
+        build: .
+        command: npm run dev
+        volumes:
+            - ".:/home/app/gettingtoknow-graphql"
+            - "/home/app/gettingtoknow-graphql/node_modules"
+        ports:
+            - "8080:8080"
+        links:
+            - db
+    db:
+        image: mongo
+        ports:
+            - "27017:27017"
