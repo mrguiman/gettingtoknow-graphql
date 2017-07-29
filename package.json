@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/MrGuiMan/gettingtoknow-graphql#readme",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "mongoose": "^4.11.4"
   },
