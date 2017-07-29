@@ -1,15 +1,15 @@
 const app = require('express')();
-const MongoClient = require('mongodb').MongoClient;
+const mongoose = require('mongoose');
 const dbUrl = 'mongodb://db:27017/gettingtoknow-graphql';
 
 app.set('port', 8080);
 
-MongoClient.connect(dbUrl, (err, db) => {
-    if(err) console.log(err);
-    console.log(`Connected to db at ${dbUrl}`);
-    db.close();
-});
+mongoose.Promise = global.Promise;
+mongoose.connect(dbUrl);
 
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.on('open', () => { console.log(`Connected to db at ${dbUrl}`); });
 
 app.get('/', (req, res) => {
     res.status(200).send('Hello World !');

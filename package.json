@@ -19,7 +19,7 @@
   "homepage": "https://github.com/MrGuiMan/gettingtoknow-graphql#readme",
   "dependencies": {
     "express": "^4.15.3",
-    "mongodb": "^2.2.30"
+    "mongoose": "^4.11.4"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
