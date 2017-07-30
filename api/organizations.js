@@ -18,9 +18,10 @@ app.get('/:id', (req, res) => {
 app.post('/organization', (req, res) => {
     if(!req.body.name) return res.sendStatus(400);
 
-    let organization = new Organization({ name: req.body.name, 
-        president: req.body.president, 
-        logo: req.body.logo 
+    let organization = new Organization({
+        name: req.body.name,
+        president: req.body.president,
+        logo: req.body.logo
     });
 
     organization.save()
