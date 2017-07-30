@@ -19,9 +19,16 @@ app.use('/organizations', require('./api/organizations'));
 app.use('/projects', require('./api/projects'));
 
 // GraphQL Support
+const mongoContext = {
+    Organization: require('./models/Organization')
+}
+
 const schema = require('./schema');
-app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
-app.use('/graphiql',  graphiqlExpress({ endpointURL: '/graphql' }));
+app.use('/graphql', bodyParser.json(), graphqlExpress({
+    schema,
+    context: Object.assign({}, mongoContext)
+}));
+app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
 // Start the server
 app.listen(app.get('port'),() => {

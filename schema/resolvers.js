@@ -1,22 +1,19 @@
-const orgs = [
-    { 
-        id: '421421412', 
-        name: 'Micropple', 
-        logo: 'https://myi.mg/12309eqw',
-        president: 'John Doe'
-    }
-]
-
 module.exports = {
     Query: {
-        organizations: () => orgs,
-        organization: (obj, args, context) => orgs.filter((org) => org.id == args.id)[0]
+        organizations: (obj, args, context) => {
+            return context.Organization.find()
+                .then((orgs) => orgs.map((org) => org.toPlainObject()))
+        },
+        organization: (obj, args, context) => {
+            return context.Organization.findOne({ id: args.id })
+                .then(org => org ? org.toPlainObject() : null)
+        }
     },
     Mutation: {
-        createOrganization: (obj, args) => {
-            const newOrg = Object.assign({ id: Math.floor(Math.random() * 10e8).toString() }, args);
-            orgs.push(newOrg);
-            return newOrg;
+        createOrganization: (obj, args, context) => {
+            let organization = new context.Organization(args);
+            return organization.save()
+                .then((org) => org.toPlainObject());
         }
     }
 };

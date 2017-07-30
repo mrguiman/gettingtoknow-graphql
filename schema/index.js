@@ -14,7 +14,7 @@ const typeDefs = `
         # Retrieves every organization
         organizations: [Organization!]!
         # Retrieves a single organization by ID
-        organization(id: ID!): Organization!
+        organization(id: ID!): Organization
     }
 
     type Mutation {
