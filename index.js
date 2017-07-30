@@ -1,6 +1,7 @@
 const app = require('express')();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
 
 app.set('port', 8080);
 app.use(bodyParser());
@@ -16,10 +17,11 @@ db.on('open', () => { console.log(`Connected to db at ${dbUrl}`); });
 // Define routes
 app.use('/organizations', require('./api/organizations'));
 app.use('/projects', require('./api/projects'));
-app.get('/', (req, res) => {
-    res.status(200).send('Hello World !');
-});
 
+// GraphQL Support
+const schema = require('./schema');
+app.use('/graphql', bodyParser(), graphqlExpress({ schema }));
+app.use('/graphiql',  graphiqlExpress({ endpointURL: '/graphql' }));
 
 // Start the server
 app.listen(app.get('port'),() => {
