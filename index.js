@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 app.set('port', 8080);
-app.use(bodyParser());
+app.use(bodyParser.json());
 
 const dbUrl = 'mongodb://db:27017/gettingtoknow-graphql';
 mongoose.Promise = global.Promise;
@@ -19,7 +19,6 @@ app.use('/projects', require('./api/projects'));
 app.get('/', (req, res) => {
     res.status(200).send('Hello World !');
 });
-
 
 // Start the server
 app.listen(app.get('port'),() => {
