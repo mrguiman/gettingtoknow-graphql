@@ -21,7 +21,8 @@ Project.methods.toPlainObject = function() {
     return {
         id: this.id.toString(),
         name: this.name,
-        type: this.type
+        type: this.type,
+        organizationID: this.organizationID
     }
 }
 module.exports = mongoose.model('Project', Project);
