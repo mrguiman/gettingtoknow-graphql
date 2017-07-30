@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
 
 app.set('port', 8080);
-app.use(bodyParser());
+app.use(bodyParser.json());
 
 const dbUrl = 'mongodb://db:27017/gettingtoknow-graphql';
 mongoose.Promise = global.Promise;
@@ -20,7 +20,7 @@ app.use('/projects', require('./api/projects'));
 
 // GraphQL Support
 const schema = require('./schema');
-app.use('/graphql', bodyParser(), graphqlExpress({ schema }));
+app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
 app.use('/graphiql',  graphiqlExpress({ endpointURL: '/graphql' }));
 
 // Start the server
