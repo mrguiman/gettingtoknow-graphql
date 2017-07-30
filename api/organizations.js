@@ -1,18 +1,20 @@
 const app = require('express')();
 const Organization = require('../models/Organization');
 
+// Get all organizations
 app.get('/', (req, res) => {
     Organization.find()
         .then(orgs => {
-            res.json(orgs);
+            res.json(orgs.map((org) => org.toPlainObject()));
         });
 });
+
+// Get a single organization
 app.get('/:id', (req, res) => {
-    if(!req.params.id) return res.sendStatus(400);
     Organization.findOne({ _id: req.params.id })
         .then((org) => {
             if(!org) return res.sendStatus(404);
-            res.json(org.toPlainObject())
+            res.json(org.toPlainObject());
         })
         .catch((err) => res.sendStatus(500));
 });
