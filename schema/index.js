@@ -8,7 +8,6 @@ const typeDefs = `
         name: String!
         logo: String
         president: String
-        projects: [Project!]
     }
 
     type Query {
@@ -16,6 +15,11 @@ const typeDefs = `
         organizations: [Organization!]!
         # Retrieves a single organization by ID
         organization(id: ID!): Organization!
+    }
+
+    type Mutation {
+        # Creates a new organization
+        createOrganization(name: String!, logo: String, president: String): Organization
     }
 `;
 
