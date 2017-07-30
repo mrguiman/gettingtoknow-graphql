@@ -11,11 +11,12 @@ app.get('/:id', (req, res) => {
     if(!req.params.id) return res.sendStatus(400);
     Organization.findOne({ _id: req.params.id })
         .then((org) => {
-            if(!org) return res.sendStatus(200);
+            if(!org) return res.sendStatus(404);
             res.json(org.toPlainObject())
-        });
+        })
+        .catch((err) => res.sendStatus(500));
 });
-app.post('/organization', (req, res) => {
+app.post('/', (req, res) => {
     if(!req.body.name) return res.sendStatus(400);
 
     let organization = new Organization({
