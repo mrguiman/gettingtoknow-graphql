@@ -15,6 +15,7 @@ db.on('open', () => { console.log(`Connected to db at ${dbUrl}`); });
 
 // Define routes
 app.use('/organizations', require('./api/organizations'));
+app.use('/projects', require('./api/projects'));
 app.get('/', (req, res) => {
     res.status(200).send('Hello World !');
 });

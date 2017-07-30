@@ -1,5 +1,6 @@
 const app = require('express')();
 const Organization = require('../models/Organization');
+const Project = require('../models/Project');
 
 // Get all organizations
 app.get('/', (req, res) => {
@@ -18,6 +19,17 @@ app.get('/:id', (req, res) => {
         })
         .catch((err) => res.sendStatus(500));
 });
+
+// Get an organization's projects
+app.get('/:id/projects', (req, res) => {
+    Project.find({ organizationID: req.params.id })
+        .then((projects) => {
+            res.json(projects.map((project) => project.toPlainObject()));
+        })
+        .catch(() => res.sendStatus(500));
+});
+
+// Insert a new organization
 app.post('/', (req, res) => {
     if(!req.body.name) return res.sendStatus(400);
 
@@ -29,6 +41,29 @@ app.post('/', (req, res) => {
 
     organization.save()
         .then((org) => { res.json(org.toPlainObject()) });
+});
+
+// Insert a new project for an organization
+app.post('/:id/projects', (req, res) => {
+    if(!req.body.name || !req.body.type) 
+        return res.sendStatus(400);
+
+    // We fetch the organization first to make sure it exists
+    Organization.findOne({ _id: req.params.id })
+        .then((org) => {
+            if(!org) res.sendStatus(404);
+
+            let project = new Project({ 
+                name: req.body.name,
+                type: req.body.type,
+                organizationID: org.id.toString()
+            });
+
+            project.save()
+                .then((org) => { res.json(org.toPlainObject()) });
+        })
+        .catch(() => res.sendStatus(500))
+
 });
 
 module.exports = app;
