@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node_modules/.bin/nodemon index.js",
+    "dev": "node_modules/.bin/nodemon --inspect=0.0.0.0 index.js",
     "start": "node index.js"
   },
   "repository": {

@@ -8,6 +8,7 @@ services:
             - "/home/app/gettingtoknow-graphql/node_modules"
         ports:
             - "8080:8080"
+            - "9229:9229"
         links:
             - db
     db:
