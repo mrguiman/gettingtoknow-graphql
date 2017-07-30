@@ -5,7 +5,7 @@ module.exports = {
                 .then((orgs) => orgs.map((org) => org.toPlainObject()))
         },
         organization: (obj, args, context) => {
-            return context.Organization.findOne({ id: args.id })
+            return context.Organization.findOne({ _id: args.id })
                 .then(org => org ? org.toPlainObject() : null)
         }
     },
@@ -15,5 +15,11 @@ module.exports = {
             return organization.save()
                 .then((org) => org.toPlainObject());
         }
-    }
+    },
+    Organization: {
+        projects: (obj, args, context) => {
+            return context.Project.find({ organizationID: obj.id })
+                .then(projects => projects.map(project => project.toPlainObject()))
+        }
+    },
 };

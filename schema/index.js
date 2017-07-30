@@ -8,6 +8,13 @@ const typeDefs = `
         name: String!
         logo: String
         president: String
+        projects: [Project!]!
+    }
+
+    type Project {
+        id: ID!
+        name: String!
+        type: String!
     }
 
     type Query {

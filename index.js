@@ -20,7 +20,8 @@ app.use('/projects', require('./api/projects'));
 
 // GraphQL Support
 const mongoContext = {
-    Organization: require('./models/Organization')
+    Organization: require('./models/Organization'),
+    Project: require('./models/Project')
 }
 
 const schema = require('./schema');
